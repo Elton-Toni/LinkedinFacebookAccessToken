@@ -1,0 +1,81 @@
+<div class="content" role="main">
+
+    <h2 class=" pb-4">{{labelSelectAccount}}</h2>
+
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col text-center">
+                {{labelSocial}}
+            </div>
+            <div class="col text-center">
+                {{labelUsername}}
+            </div>
+            <div class="col text-center">
+                {{labelClientId}}
+            </div>
+            <div class="col text-center">
+                {{labelGenerateToken}}
+            </div>
+            <div class="col text-center">
+                {{labelRefreshToken}}
+            </div>
+        </div> -->
+        <div *ngFor="let account of linkedinAccounts">
+            <div class="row pb-3">
+                <div class="col text-center">
+                    {{account.username}}
+                </div>
+                <div class="col text-center">
+                    {{account.clientId}}
+                </div>
+                <div class="col text-center">
+                    <!-- <form action="{{httpsAuthorization}}" method="GET">
+                        <input type="hidden" name="response_type" value="{{responseType}}" />
+                        <input type="hidden" name="client_id" value="{{clientId}}" />
+                        <input type="hidden" name="redirect_uri" value="{{redirectUrl}}" />
+                        <input type="hidden" name="scope" value="{{scopes}}" />
+                        <input type="submit" value="{{labelAuthorizationCode}}" />
+                    </form> -->
+                    <a href="{{getAuthorizationUrl}}" class="btn btn-primary">{{labelAuthorizationCode}}</a>
+                </div>
+                <div class="col text-center">
+                     <form action="{{httpsAccessToken}}" method="POST" target="_blank">
+                        <input type="hidden" name="grant_type" value="{{grantType}}" />
+                        <input type="hidden" name="redirect_uri" value="{{redirectUrl}}" />
+                        <input type="hidden" name="client_id" value="{{clientId}}" />
+                        <input type="hidden" name="client_secret" value="{{secret}}" />
+                        <input type="hidden" name="code" value="{{authorizationCode}}" />
+                        <input type="submit" _blank value="{{labelAccessToken}}"  class="btn btn-primary"/>
+                    </form>
+                    <!-- <a href="{{getAccessTokenUrl}}"  class="btn btn-primary">{{labelAccessToken}}</a> -->
+                    <!-- <button class="btn btn-primary" (click)="getAccessToken()">{{labelAccessToken}}</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pt-5" *ngIf="authorizationCode !== null && authorizationCode !== undefined">
+        <h2 class="pb-4">{{labelAuthorizationCode}}</h2>
+        <p>{{authorizationCode}}</p>
+    </div>
+
+    <!-- <div class="container pt-5" *ngIf="accessToken !== null && accessToken !== undefined">
+        <h2 class="pb-4">{{labelAccessToken}}</h2>
+        <p>{{accessToken}}</p>
+        <h2 class=" pb-4">{{labelExpiresIn}}</h2>
+        <p>{{expiresIn}}</p>
+    </div> -->
+
+    <div class="container pt-5" *ngIf="errorDescription !== null && errorDescription !== undefined">
+        <h2 class="pb-4">{{errorDescription}}</h2>
+    </div>
+
+    <div class="container pt-5" *ngIf="userCancelledLogin !== null && userCancelledLogin !== undefined">
+        <h2 class="pb-4">{{labeluserCancelledLogin}}</h2>
+    </div>
+
+    <div class="container pt-5" *ngIf="userCancelledAuthorize !== null && userCancelledAuthorize !== undefined">
+        <h2 class="pb-4">{{labeluserCancelledAuthorize}}</h2>
+    </div>
+
+</div>

@@ -1,0 +1,37 @@
+<div class="content" role="main">
+
+    <h2 class=" pb-4">labelSelectAccount</h2>
+
+    <div class="container">
+        <div *ngFor="let account of linkedinAccounts">
+            <div class="row pb-3">
+                <div class="col text-center">
+                    {{account.username}}
+                </div>
+                <div class="col text-center">
+                    {{account.appId}}
+                </div>
+                <div class="col text-center">
+                    <div
+                        class="fb-login-button"
+                        data-size="medium"
+                        data-button-type="login_with"
+                        data-layout="default"
+                        data-scope="{{scopes}}"
+                        data-auto-logout-link="false"
+                        data-use-continue-as="false"
+                        onlogin="checkLoginState()">
+                        {{labelLogin}}
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <button (click)="refreshToken(account)">
+                        {{labelAccessToken}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
